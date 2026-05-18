@@ -1,0 +1,22 @@
+kind: synthetic
+processed_dir: data/processed/synthetic
+regenerate: false
+split_mode: time_block
+allow_leaky_split: false
+
+synthetic:
+  n_neurons: 32
+  duration_s: 20.0
+  dt_ms: 1.0
+  connection_prob: 0.08
+  excitatory_fraction: 0.8
+  noise_std: 0.5
+  seed: 42
+  train_fraction: 0.7
+  val_fraction: 0.15
+  test_fraction: 0.15
+  window_size: 100
+  horizon: 10
+  bin_size_ms: 10.0
+  use_adaptation: true
+  held_out_neuron_fraction: 0.15

@@ -1,0 +1,8 @@
+kind: allen_neuropixels
+# CSV/Parquet with columns: unit_id, session_id, spike_time_s [, brain_area]
+spikes_path: ${oc.env:UNIMARKET_NPX_SPIKES, ""}
+stimulus_table_path: ${oc.env:UNIMARKET_NPX_STIM, ""}
+bin_size_ms: 10.0
+allow_stimulus_identity: false
+split_mode: session_generalization
+adapter_status: schema_validated_only

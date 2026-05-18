@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "unimarket"
+version = "0.1.0"
+description = "UniMarket: mechanistically constrained neural dynamics from public electrophysiology, with non-circular validation."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [{ name = "UniMarket contributors" }]
+dependencies = [
+    "numpy>=1.26",
+    "scipy>=1.11",
+    "pandas>=2.1",
+    "scikit-learn>=1.3",
+    "torch>=2.1",
+    "matplotlib>=3.8",
+    "tqdm>=4.66",
+    "pydantic>=2.5",
+    "pyyaml>=6.0",
+    "typer>=0.9",
+    "networkx>=3.2",
+    "h5py>=3.10",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "ruff>=0.1",
+]
+nwb = [
+    "pynwb>=2.5",
+]
+viz = [
+    "tensorboard>=2.15",
+]
+
+[project.scripts]
+unimarket = "unimarket.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --color=yes"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::UserWarning",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

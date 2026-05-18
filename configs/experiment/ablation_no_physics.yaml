@@ -1,0 +1,38 @@
+run_name: ablation_no_physics_neural_ode
+seed: 42
+
+data:
+  kind: synthetic
+  processed_dir: data/processed/synthetic
+  regenerate: false
+  split_mode: time_block
+  allow_leaky_split: false
+  model_features: ["history_voltage", "history_current"]
+  synthetic:
+    n_neurons: 16
+    duration_s: 12.0
+    dt_ms: 1.0
+    seed: 7
+    use_adaptation: true
+
+window_size: 80
+horizon: 8
+
+# This ablation swaps the constrained LIF for an unconstrained neural ODE cell.
+model:
+  name: neural_ode
+  task: voltage
+  hidden_dim: 64
+  uses:
+    cell_id_embedding: false
+
+train:
+  epochs: 5
+  batch_size: 64
+  lr: 1.0e-3
+  device: auto
+
+selection_split: val
+selection_metric: loss
+allow_cell_id_embedding: false
+metadata_conditioned: false

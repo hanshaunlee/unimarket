@@ -1,0 +1,44 @@
+run_name: synthetic_population_forecast
+seed: 42
+
+data:
+  kind: synthetic
+  processed_dir: data/processed/synthetic
+  regenerate: false
+  split_mode: time_block
+  allow_leaky_split: false
+  # stimulus identity is intentionally NOT in the feature set
+  model_features: ["history_counts"]
+  synthetic:
+    n_neurons: 24
+    duration_s: 12.0
+    dt_ms: 1.0
+    connection_prob: 0.1
+    seed: 11
+    use_adaptation: true
+
+window_bins: 20
+horizon_bins: 5
+
+model:
+  name: graph_latent_dynamics
+  task: population
+  hidden_dim: 64
+  graph_mode: learned
+  uses:
+    session_id_embedding: false
+
+train:
+  epochs: 5
+  batch_size: 16
+  lr: 1.0e-3
+  device: auto
+
+selection_split: val
+selection_metric: loss
+allow_stimulus_identity: false
+allow_global_time_features: false
+allow_trial_index: false
+allow_block_index: false
+allow_session_id_embedding: false
+metadata_conditioned: false

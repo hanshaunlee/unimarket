@@ -1,0 +1,57 @@
+run_name: smoke_synthetic_graph
+seed: 42
+
+data:
+  kind: synthetic
+  processed_dir: data/processed/synthetic
+  regenerate: false
+  split_mode: time_block
+  allow_leaky_split: false
+  model_features: ["history_counts"]
+  synthetic:
+    n_neurons: 16
+    duration_s: 8.0
+    dt_ms: 1.0
+    connection_prob: 0.1
+    excitatory_fraction: 0.8
+    noise_std: 0.5
+    seed: 42
+    use_adaptation: true
+    window_size: 60
+    horizon: 5
+    bin_size_ms: 10.0
+
+window_bins: 16
+horizon_bins: 4
+
+model:
+  name: graph_latent_dynamics
+  task: population
+  hidden_dim: 32
+  graph_mode: learned
+  graph_seed: 0
+  uses:
+    cell_id_embedding: false
+    pair_id_embedding: false
+    session_id_embedding: false
+
+train:
+  epochs: 3
+  batch_size: 16
+  lr: 1.0e-3
+  grad_clip: 1.0
+  early_stopping_patience: 3
+  device: auto
+  log_every_n_steps: 20
+
+selection_split: val
+selection_metric: loss
+
+allow_stimulus_identity: false
+allow_global_time_features: false
+allow_trial_index: false
+allow_block_index: false
+allow_cell_id_embedding: false
+allow_pair_id_embedding: false
+allow_session_id_embedding: false
+metadata_conditioned: false

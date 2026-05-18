@@ -1,0 +1,48 @@
+run_name: synthetic_single_cell_lif
+seed: 42
+
+data:
+  kind: synthetic
+  processed_dir: data/processed/synthetic
+  regenerate: false
+  split_mode: time_block
+  allow_leaky_split: false
+  model_features: ["history_voltage", "history_current"]
+  synthetic:
+    n_neurons: 16
+    duration_s: 12.0
+    dt_ms: 1.0
+    connection_prob: 0.08
+    excitatory_fraction: 0.8
+    noise_std: 0.5
+    seed: 7
+    use_adaptation: true
+
+window_size: 80
+horizon: 8
+
+model:
+  name: lif_residual
+  task: voltage
+  hidden_dim: 64
+  residual_scale: 0.2
+  learn_per_neuron_params: true
+  uses:
+    cell_id_embedding: false
+    pair_id_embedding: false
+    session_id_embedding: false
+
+train:
+  epochs: 5
+  batch_size: 64
+  lr: 1.0e-3
+  grad_clip: 1.0
+  device: auto
+  log_every_n_steps: 50
+
+selection_split: val
+selection_metric: loss
+
+allow_stimulus_identity: false
+allow_cell_id_embedding: false
+metadata_conditioned: false

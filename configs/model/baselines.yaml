@@ -1,0 +1,6 @@
+name: persistence  # one of: persistence, mean_rate, ar, glm_poisson, ridge, neural_ode
+task: voltage
+hidden_dim: 64
+p: 5
+uses:
+  cell_id_embedding: false

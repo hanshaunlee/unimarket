@@ -1,0 +1,6 @@
+kind: allen_synphys
+# CSV with columns: pair_id, pre_cell_id, post_cell_id, stimulus_path, response_path,
+#                   sampling_rate_hz, [connection_label]
+source_csv: ${oc.env:UNIMARKET_SYNPHYS_CSV, ""}
+split_mode: pair_generalization
+adapter_status: schema_validated_only

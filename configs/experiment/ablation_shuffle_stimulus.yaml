@@ -1,0 +1,47 @@
+run_name: ablation_shuffle_stimulus
+seed: 42
+
+# Stimulus is excluded from inputs by default. This ablation is a placeholder for
+# experiments that *would* introduce stimulus identity; here we keep it disabled
+# and document the intent: any leaked stimulus identifier will be caught by the
+# leakage check.
+data:
+  kind: synthetic
+  processed_dir: data/processed/synthetic
+  regenerate: false
+  split_mode: time_block
+  allow_leaky_split: false
+  model_features: ["history_counts"]
+  synthetic:
+    n_neurons: 16
+    duration_s: 8.0
+    dt_ms: 1.0
+    seed: 42
+    use_adaptation: true
+
+window_bins: 16
+horizon_bins: 4
+
+model:
+  name: graph_latent_dynamics
+  task: population
+  hidden_dim: 32
+  graph_mode: learned
+  uses:
+    session_id_embedding: false
+
+train:
+  epochs: 3
+  batch_size: 16
+  lr: 1.0e-3
+  device: auto
+
+selection_split: val
+selection_metric: loss
+
+# Intentionally still forbidding stimulus identity.
+allow_stimulus_identity: false
+allow_global_time_features: false
+allow_trial_index: false
+allow_block_index: false
+metadata_conditioned: false

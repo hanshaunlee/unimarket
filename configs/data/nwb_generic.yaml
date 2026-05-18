@@ -1,0 +1,4 @@
+kind: nwb_generic
+# Single .nwb file or a directory.
+source: ${oc.env:UNIMARKET_NWB_PATH, ""}
+adapter_status: functional_with_local_nwb

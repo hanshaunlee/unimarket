@@ -1,0 +1,6 @@
+kind: allen_cell_types
+dataset_name: allen_cell_types
+# Set this to a local directory containing .nwb files. Not auto-downloaded.
+source_dir: ${oc.env:UNIMARKET_ALLEN_CT_DIR, ""}
+split_mode: cell_generalization
+allow_leaky_split: false

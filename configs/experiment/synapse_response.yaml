@@ -1,0 +1,29 @@
+run_name: synapse_response_demo
+seed: 42
+
+# This experiment expects a local SynPhys-style manifest; the smoke pipeline does
+# not run this end-to-end automatically.
+data:
+  kind: allen_synphys
+  source_csv: ${oc.env:UNIMARKET_SYNPHYS_CSV, ""}
+  split_mode: pair_generalization
+  allow_leaky_split: false
+
+model:
+  name: synapse_response
+  task: synapse
+  hidden_dim: 32
+  max_delay_steps: 20
+  uses:
+    pair_id_embedding: false
+
+train:
+  epochs: 10
+  batch_size: 32
+  lr: 1.0e-3
+  device: auto
+
+selection_split: val
+selection_metric: loss
+allow_pair_id_embedding: false
+metadata_conditioned: false

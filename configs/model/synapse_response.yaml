@@ -1,0 +1,9 @@
+name: synapse_response
+task: synapse
+hidden_dim: 32
+max_delay_steps: 20
+constrain_amplitude_sign: false
+amplitude_sign: 1.0
+residual_scale: 0.1
+uses:
+  pair_id_embedding: false

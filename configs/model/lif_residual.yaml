@@ -1,0 +1,9 @@
+name: lif_residual
+task: voltage
+hidden_dim: 64
+residual_scale: 0.2
+learn_per_neuron_params: true
+uses:
+  cell_id_embedding: false
+  pair_id_embedding: false
+  session_id_embedding: false

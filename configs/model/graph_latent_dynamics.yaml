@@ -1,0 +1,9 @@
+name: graph_latent_dynamics
+task: population
+hidden_dim: 64
+graph_mode: learned
+graph_seed: 0
+uses:
+  cell_id_embedding: false
+  pair_id_embedding: false
+  session_id_embedding: false

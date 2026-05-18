@@ -1,0 +1,38 @@
+run_name: ablation_no_graph_spike_transformer
+seed: 42
+
+data:
+  kind: synthetic
+  processed_dir: data/processed/synthetic
+  regenerate: false
+  split_mode: time_block
+  allow_leaky_split: false
+  model_features: ["history_counts"]
+  synthetic:
+    n_neurons: 16
+    duration_s: 8.0
+    dt_ms: 1.0
+    seed: 42
+    use_adaptation: true
+
+window_bins: 16
+horizon_bins: 4
+
+model:
+  name: spike_transformer
+  task: population
+  hidden_dim: 32
+  n_layers: 2
+  uses:
+    session_id_embedding: false
+
+train:
+  epochs: 3
+  batch_size: 16
+  lr: 1.0e-3
+  device: auto
+
+selection_split: val
+selection_metric: loss
+allow_stimulus_identity: false
+metadata_conditioned: false
